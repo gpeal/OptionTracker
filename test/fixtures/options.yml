@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  strile_price: 9.99
+  contract_name: MyString
+  last: 9.99
+  bid: 9.99
+  ask: 9.99
+  change: 9.99
+  percent_change: 9.99
+  volume: 1
+  open_interest: 1
+  implied_volatility: 9.99
+
+two:
+  strile_price: 9.99
+  contract_name: MyString
+  last: 9.99
+  bid: 9.99
+  ask: 9.99
+  change: 9.99
+  percent_change: 9.99
+  volume: 1
+  open_interest: 1
+  implied_volatility: 9.99

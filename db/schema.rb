@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 20151013051230) do
 
   create_table "options", force: :cascade do |t|
-    t.decimal  "strile_price"
+    t.decimal  "strike_price"
     t.string   "contract_name"
     t.decimal  "last"
     t.decimal  "bid"
@@ -24,9 +24,14 @@ ActiveRecord::Schema.define(version: 20151013051230) do
     t.integer  "volume"
     t.integer  "open_interest"
     t.decimal  "implied_volatility"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.integer  "option_type",             default: 0
+    t.integer  "expiration_time_seconds", default: 0
+    t.integer  "stock_id"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
+
+  add_index "options", ["stock_id"], name: "index_options_on_stock_id"
 
   create_table "stocks", force: :cascade do |t|
     t.string   "name"

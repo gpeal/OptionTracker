@@ -2,7 +2,94 @@
 <p>
   Company Name: <%= @stock.name %>
   <br />
-  Ticker: <%= @stock.ticker %>
+  Ticker: <%= @stock.ticker.upcase %>
 </p>
-<%= link_to 'Edit', edit_stock_path(@stock) %> |
-<%= link_to 'Back', stocks_path %>
+
+<table>
+    <tr>
+        <th>
+            Type
+        </th>
+        <th>
+            Strike
+        </th>
+        <th>
+            Contract Name
+        </th>
+        <th>
+            Last
+        </th>
+        <th>
+            Bid
+        </th>
+        <th>
+            Ask
+        </th>
+        <th>
+            Change
+        </th>
+        <th>
+            Percent Change
+        </th>
+        <th>
+            Volume
+        </th>
+        <th>
+            Open Interest
+        </th>
+        <th>
+            Implied Volatility
+        </th>
+        <th>
+            Expiration
+        </th>
+    </tr>
+
+    <% @stock.options.all.each do |option| %>
+    <tr>
+        <td>
+            <%= "#{option.option_type}" %>
+        </td>
+        <td>
+            <%= "#{option.strike_price}" %>
+        </td>
+        <td>
+            <%= "#{option.contract_name}" %>
+        </td>
+        <td>
+            <%= "#{option.last}" %>
+        </td>
+        <td>
+            <%= "#{option.bid}" %>
+        </td>
+        <td>
+            <%= "#{option.ask}" %>
+        </td>
+        <td>
+            <%= "#{option.change}" %>
+        </td>
+        <td>
+            <%= "#{option.percent_change}" %>
+        </td>
+        <td>
+            <%= "#{option.volume}" %>
+        </td>
+        <td>
+            <%= "#{option.open_interest}" %>
+        </td>
+        <td>
+            <%= "#{option.implied_volatility}" %>
+        </td>
+        <td>
+            <%= "#{Time.at(option.expiration_time_seconds).gmtime.strftime("%Y-%b-%-d")}" %>
+        </td>
+    </tr>
+<% end %>
+
+</table>
+
+
+  <br />
+
+  <%= link_to 'Edit', edit_stock_path(@stock) %> |
+  <%= link_to 'Back', stocks_path %>

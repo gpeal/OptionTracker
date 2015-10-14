@@ -1,8 +1,6 @@
 class Option < ActiveRecord::Base
   belongs_to :stock
 
-  validates :contract_name, uniqueness: true
-
   enum option_type: [:put, :call]
 
   def to_s

@@ -9,8 +9,11 @@ task :update_option, [:ticker] => :environment do |t, args|
 
   expiration_time_seconds = doc.xpath("//*[contains(@id, 'options_menu')]//option[1]/@value").to_s.to_i
 
+  old_count = Option.count
   create_options_for_xpath(stock, doc, "//*[contains(@id, 'optionsCallsTable')]//tbody/tr", Option.option_types[:call], expiration_time_seconds)
   create_options_for_xpath(stock, doc, "//*[contains(@id, 'optionsPutsTable')]//tbody/tr", Option.option_types[:put], expiration_time_seconds)
+  new_count = Option.count
+  puts "Created #{new_count - old_count} options for #{stock.name}"
 
 
 end
@@ -28,9 +31,8 @@ def create_options_for_xpath(stock, doc, xpath, type, expiration_time_seconds)
     volume = row.at_xpath("td[8]/strong/text()").to_s
     open_interest = row.at_xpath("td[9]/div/text()").to_s
     implied_volatility = row.at_xpath("td[10]/div/text()").to_s.sub!('%', '')
-    option = Option.find_or_initialize_by(contract_name: contract_name)
 
-    option.update(
+    option = Option.new(
       stock: stock,
       strike_price: strike_price,
       contract_name: contract_name,
